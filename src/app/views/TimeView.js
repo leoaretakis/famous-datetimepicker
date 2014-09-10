@@ -24,14 +24,21 @@ define(function(require, exports, module) {
     this.timeModifier.sizeFrom(this.getSize());
 
     this.timeSurface = new Surface({
-      size: [undefined, 50]
+      size: [undefined, 50],
+      properties: {
+        backgroundColor: 'white',
+        color: 'gray',
+        border: 'solid 1px'
+      }
     });
     this.setContent();
     this.timeSurface.pipe(this._eventOutput);
 
-    // this.timeSurface.on('click', function() {
-    //   this._eventOutput.emit('editTask', this.model);
-    // }.bind(this));
+
+
+    this.timeSurface.on('click', function() {
+      this._eventOutput.emit('editTask', this.model);
+    }.bind(this));
 
     this._add(this.timeModifier).add(this.timeSurface);
   }

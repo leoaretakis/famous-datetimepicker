@@ -16,12 +16,15 @@ define(function(require, exports, module) {
     function TimeListView() {
         View.apply(this, arguments);
 
-        this.collection = new Backbone.Collection([1,5,4,8,7,8,4,7,7,7,7,7,8]);
+        this.collection = new Backbone.Collection([1,5,4,8,7,8,,5,5,5,5,5,5,4,7,7,7,7,7,8]);
 
         this.timeViews = [];
 
         this.scrollview = new Scrollview({
-            margin: 100000
+            margin: 100000,
+            properties: {
+                backgroundColor: 'white'
+            }
         });
 
         this.scrollview.sync = new GenericSync(['mouse', 'touch', 'scroll'], {direction: 1});
@@ -33,11 +36,16 @@ define(function(require, exports, module) {
         this.scrollview.sequenceFrom(this.viewSequence);
         this.setContent();
 
-        this._eventInput.on('editTask', function(data) {
-            this._eventOutput.emit('editTask', data);
-        }.bind(this));
+        // this.scrollview._eventOutput.emit = function(){
+        //     debugger
+        //     Scrollview.prototype.emit.call(this, arguments)
+        // }
 
-        this._add(this.scrollview);
+        // this._eventInput.on('editTask', function(data) {
+        //     this._eventOutput.emit('editTask', data);
+        // }.bind(this));
+
+        this.add(this.scrollview);
     }
 
     TimeListView.prototype = Object.create(View.prototype);
