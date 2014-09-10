@@ -62,7 +62,7 @@ define(function(require, exports, module) {
   function _createResultView(){
     var sur = new Surface({
       size: [undefined, 60],
-      content: 'Friday, March 28th<br/>12:00 PM',
+      content: 'Friday, March 28th<br/>12:00 PM', //TODO templates
       properties: {
         textAlign: 'center',
         fontFamily: 'helvetica',

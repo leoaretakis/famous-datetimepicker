@@ -28,7 +28,10 @@ define(function(require, exports, module) {
       properties: {
         backgroundColor: 'white',
         color: 'gray',
-        border: 'solid 1px'
+        border: 'solid 1px',
+        fontFamily: 'helvetica',
+        lineHeight: '50px',
+        paddingLeft: '10px'
       }
     });
     this.setContent();
@@ -51,16 +54,12 @@ define(function(require, exports, module) {
   };
 
   TimeView.prototype.setContent = function() {
-    this.timeSurface.setContent(template.call(this));
+    this.timeSurface.setContent(template(this.model));
   };
 
-  var template = function() {
-    var due = this.model.get('due') ? "due" : "";
-    return "<div class='task " + this.model.get('category') + "'>" +
-    "<div class='checkbox'>&#xf10c;</div>" +
-    "<div class='taskData " + due + "'>" + this.model.get("task") + "</div>" +
-    "</div>";
+  var template = function(model) {
+    return "<div>" + model.get("ampmTime") + "</div>";
   };
 
-module.exports = TimeView;
+  module.exports = TimeView;
 });

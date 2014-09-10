@@ -16,7 +16,8 @@ define(function(require, exports, module) {
     function TimeListView() {
         View.apply(this, arguments);
 
-        this.collection = new Backbone.Collection([1,5,4,8,7,8,,5,5,5,5,5,5,4,7,7,7,7,7,8]);
+        var times = require('app/config/defaultTimes');
+        this.collection = new Backbone.Collection(times);
 
         this.timeViews = [];
 
