@@ -1,5 +1,7 @@
 define(function(require, exports, module){
 
-  module.exports = Backbone.Model.extend();
+  module.exports = Backbone.Model.extend({
+
+  });
 
 });

@@ -8,6 +8,8 @@ define(function(require, exports, module) {
     var Utility            = require('famous/utilities/Utility');
 
     var HeaderView = require('app/views/HeaderView');
+    var ContentView = require('app/views/ContentView');
+
     var TimeListView = require('app/views/TimeListView');
 
     function AppView() {
@@ -26,24 +28,19 @@ define(function(require, exports, module) {
 
         // Create the HeaderView
         this.headerView = new HeaderView();
-        // this.headerView.pipe(this._eventInput);
         this.layout.header.add(Utility.transformInFront).add(this.headerView);
 
-        // Create the TimeListView
-        this.timeListView = new TimeListView();
-        this.layout.content.add(Utility.transformBehind).add(this.timeListView);
-
+        // Create the ContentView
+        this.contentView = new ContentView();
+        this.layout.content.add(this.contentView);
 
         this.add(this.mainTransform).add(this.layout);
-
-        // _createPageView.call(this);
     }
 
     AppView.prototype = Object.create(View.prototype);
     AppView.prototype.constructor = AppView;
 
-    AppView.DEFAULT_OPTIONS = {
-    };
+    AppView.DEFAULT_OPTIONS = {};
 
     module.exports = AppView;
 
