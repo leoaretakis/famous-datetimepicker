@@ -50,7 +50,14 @@ define(function(require, exports, module) {
     function _createTitle(){
         var titleSurface = new Surface({
             size: [232, 44],
-            content: 'Select date and time'
+            content: 'Select date and time',
+            properties: {
+                textAlign: 'center',
+                fontFamily: 'Helvetica',
+                lineHeight: '44px',
+                color: '#E2FF00',
+                fontWeight: 'bold'
+            }
         });
 
         var titleModifier = new StateModifier({
@@ -64,7 +71,12 @@ define(function(require, exports, module) {
     function _createNextButton(){
         var nextSurface = new Surface({
             size: [44, 44],
-            content: 'Next'
+            content: 'Next',
+            properties: {
+                fontFamily: 'Helvetica',
+                lineHeight: '44px',
+                fontWeight: 'bold'
+            }
         });
 
         var nextModifier = new StateModifier({
