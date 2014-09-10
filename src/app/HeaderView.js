@@ -56,7 +56,8 @@ define(function(require, exports, module) {
                 fontFamily: 'Helvetica',
                 lineHeight: '44px',
                 color: '#E2FF00',
-                fontWeight: 'bold'
+                fontWeight: 'bold',
+                fontSize: '14px'
             }
         });
 
@@ -75,7 +76,8 @@ define(function(require, exports, module) {
             properties: {
                 fontFamily: 'Helvetica',
                 lineHeight: '44px',
-                fontWeight: 'bold'
+                fontWeight: 'bold',
+                fontSize: '14px'
             }
         });
 

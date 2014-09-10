@@ -7,13 +7,15 @@ define(function(require, exports, module) {
     var HeaderFooter    = require('famous/views/HeaderFooterLayout');
     // var FastClick       = require('famous/inputs/FastClick');
 
-    var HeaderView = require('./HeaderView')
+    var HeaderView      = require('./HeaderView');
+    var PageContentView = require('./PageContentView')
 
     function PageView() {
         View.apply(this, arguments);
 
         _createLayout.call(this);
         _createHeader.call(this);
+        _createPageContentView.call(this);
     }
 
     PageView.prototype = Object.create(View.prototype);
@@ -38,6 +40,11 @@ define(function(require, exports, module) {
     function _createHeader(){
         this.headerView = new HeaderView();
         this.layout.header.add(this.headerView);
+    }
+
+    function _createPageContentView(){
+        this.pageContentView = new PageContentView();
+        this.layout.content.add(this.pageContentView);
     }
 
     module.exports = PageView;

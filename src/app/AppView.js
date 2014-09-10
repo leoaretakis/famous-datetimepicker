@@ -1,5 +1,4 @@
 define(function(require, exports, module) {
-    // var Surface         = require('famous/core/Surface');
     var View            = require('famous/core/View');
     var StateModifier = require('famous/modifiers/StateModifier');
 
