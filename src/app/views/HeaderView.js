@@ -1,9 +1,11 @@
 define(function(require, exports, module) {
     var Surface         = require('famous/core/Surface');
     var View            = require('famous/core/View');
+    var Modifier  = require('famous/core/Modifier');
     var StateModifier = require('famous/modifiers/StateModifier');
     var Transform       = require('famous/core/Transform');
     var ImageSurface    = require('famous/surfaces/ImageSurface');
+    var Utility   = require('famous/utilities/Utility');
 
     function HeaderView() {
         View.apply(this, arguments);
@@ -27,7 +29,7 @@ define(function(require, exports, module) {
         });
 
         var backgroundModifier = new StateModifier({
-            transform: Transform.behind
+            transform: Transform.inFront
         });
 
         this.add(backgroundModifier).add(backgroundSurface);
@@ -41,7 +43,8 @@ define(function(require, exports, module) {
 
         var closeModifier = new StateModifier({
             origin: [0, 0.5],
-            align : [0, 0.5]
+            align : [0, 0.5],
+            transform: Transform.inFront
         });
 
         this.add(closeModifier).add(this.closeSurface);
@@ -63,7 +66,8 @@ define(function(require, exports, module) {
 
         var titleModifier = new StateModifier({
             origin: [0.5, 0.5],
-            align : [0.5, 0.5]
+            align : [0.5, 0.5],
+            transform: Transform.inFront
         });
 
         this.add(titleModifier).add(titleSurface);
@@ -83,7 +87,8 @@ define(function(require, exports, module) {
 
         var nextModifier = new StateModifier({
             origin: [1, 0.5],
-            align : [1, 0.5]
+            align : [1, 0.5],
+            transform: Transform.inFront
         });
 
         this.add(nextModifier).add(nextSurface);
