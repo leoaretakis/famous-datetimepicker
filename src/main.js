@@ -4,8 +4,10 @@ define(function(require, exports, module) {
 
     var AppModel         = require('app/models/App');
     var AppView         = require('app/views/AppView');
+    var times = require('app/config/defaultTimes');
 
-    var model = new AppModel();
+
+    var model = new AppModel({times: times});
     var appView = new AppView(model);
 
     var mainContext = Engine.createContext();
