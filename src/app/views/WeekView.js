@@ -46,22 +46,27 @@ define(function(require, exports, module) {
         var views = [];
         this.surfaces = [];
 
-        var surf, offset, mod, view;
+        var mod, view;
 
         var daySize = window.innerWidth / 7;
 
         for(var i = 0; i < 7; i++) {
             var day = this.collection.at(i);
 
-            surf = new Surface({
+            var surf = new Surface({
                 size: [daySize, 80],
-                content: day.get('date').format("dd[<br/>]DD"),
+                content: dayTemplate({
+                    id: day.id,
+                    weekDay: day.get('date').format('dd'),
+                    monthDay: day.get('date').format('DD')
+                }),
                 properties: {
                     color: 'white',
                     fontFamily: 'Helvetica',
                     textAlign: 'center'
                 }
             });
+            surf.model = day;
 
             mod = new Modifier({
                 transform: Transform.translate(0, 0, 0),
@@ -74,6 +79,14 @@ define(function(require, exports, module) {
             view._add(mod).add(surf);
 
             surf.pipe(this._eventOutput);
+            surf.on('click', function(evt){
+                var $selectedElement = $(evt.currentTarget).find(".day");
+                var dateid = $selectedElement.data("dateid");
+                var selectedDate = this.collection.get(dateid);
+                // selectedDate.set('selected', true);
+
+                this._eventOutput.emit('dateSelected', selectedDate);
+            }.bind(this));
 
             views.push(view);
             this.surfaces.push(surf);

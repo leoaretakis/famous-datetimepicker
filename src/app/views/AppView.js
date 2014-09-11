@@ -71,6 +71,10 @@ define(function(require, exports, module) {
             transform: Transform.translate(0, 50, 0)
         });
 
+        this.dateSelectionView.on('dateSelected', function(dateModel){
+            this.resultView.setContent(dateModel.get("date").format("dddd[,] MMMM Do[<br/>]hh:mm A"));
+        }.bind(this));
+
         this.layout.content.add(this.dateSelectionModifier).add(this.dateSelectionView);
     }
 
@@ -110,6 +114,13 @@ define(function(require, exports, module) {
         this.listMod = new Modifier();
         this.listContainerView.add(this.listMod).add(this.timeListView);
         this.layout.content.add(this.listContainerMod).add(this.listContainerView);
+    }
+
+    function _setListeners(){
+        this.dateSelectionView.on('dateSelected', function(dateModel){
+            debugger
+            this.resultView.setContent(dateModel.get("date").format("dddd[,] MMMM Do[<br/>]hh:mm A"));
+        }.bind(this));
     }
 
     module.exports = AppView;

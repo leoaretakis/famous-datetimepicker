@@ -25,6 +25,7 @@ define(function(require, exports, module) {
 
         _createWeekViews.call(this);
         _handleSwipe.call(this);
+        _setListeners.call(this);
     }
 
     DateSelectionView.DEFAULT_OPTIONS = {
@@ -36,29 +37,6 @@ define(function(require, exports, module) {
 
     DateSelectionView.prototype = Object.create(View.prototype);
     DateSelectionView.prototype.constructor = DateSelectionView;
-
-    // DateSelectionView.prototype.slideRight = function() {
-    //     this.pageViewPos.set(this.options.openPosition, this.options.transition, function() {
-    //         this.menuToggle = true;
-    //     }.bind(this));
-    // };
-
-    // DateSelectionView.prototype.slideLeft = function() {
-    //     this.pageViewPos.set(0, this.options.transition, function() {
-    //         this.menuToggle = false;
-    //     }.bind(this));
-    // };
-
-    // DateSelectionView.prototype.resetStrips = function() {
-    //     for(var i = 0; i < this.stripModifiers.length; i++) {
-    //         var initX = -this.options.stripWidth;
-    //         var initY = this.options.topOffset
-    //             + this.options.stripOffset * i
-    //             + this.options.stripWidth * Math.tan(-this.options.angle);
-
-    //         this.stripModifiers[i].setTransform(Transform.translate(initX, initY, 0));
-    //     }
-    // };
 
     DateSelectionView.prototype.slideRight = function() {
         this.weekViewPos.set(this._viewWidth, this.options.transition, function(){
@@ -159,6 +137,7 @@ define(function(require, exports, module) {
 
         this.currentWeekView.pipe(sync);
         this.previousWeekView.pipe(sync);
+        this.nextWeekView.pipe(sync);
 
         sync.on('end', function(data){
             if(!this._weekChanged){
@@ -182,6 +161,17 @@ define(function(require, exports, module) {
             }
 
             this.weekViewPos.set(this.weekViewPos.get() + data.delta);
+        }.bind(this));
+    }
+
+    function _setListeners(){
+        this.currentWeekView.pipe(this._eventInput);
+        this.previousWeekView.pipe(this._eventInput);
+        this.nextWeekView.pipe(this._eventInput);
+
+        this._eventInput.on('dateSelected', function(data) {
+            debugger
+            this._eventOutput.emit('dateSelected', data);
         }.bind(this));
     }
 

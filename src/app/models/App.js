@@ -30,8 +30,10 @@ define(function(require, exports, module){
       var dayOfWeek = date.day();
       if(dayOfWeek > 0){
         for (var i = 0; i < dayOfWeek; i++) {
+          var current = moment(date).add(i - dayOfWeek, 'day');
           var pastDay = new Day({
-            date: moment(date).add(i - dayOfWeek, 'day'),
+            id: current.valueOf(),
+            date: current,
             selected: false
           });
           week.add(pastDay);
@@ -39,14 +41,17 @@ define(function(require, exports, module){
       }
 
       week.add(new Day({
+        id: date.valueOf(),
         date: moment(date),
         selected: selected
       }));
 
       if(dayOfWeek < 6){
         for (var i = 1; i + dayOfWeek <= 6; i++) {
+          var current = moment(date).add(i, 'day');
           var futureDay = new Day({
-            date: moment(date).add(i, 'day'),
+            id: current.valueOf(),
+            date: current,
             selected: false
           });
           week.add(futureDay);
