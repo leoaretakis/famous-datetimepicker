@@ -1,0 +1,23 @@
+{
+  "name": "famous-datetimepicker",
+  "version": "0.0.0",
+  "description": "A date and time picker using famo.us framework",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/leoaretakis/famous-datetimepicker.git"
+  },
+  "keywords": [
+    "datetimepicker",
+    "famo.us"
+  ],
+  "dependencies": {
+    "handlebars": "",
+    "express": "~3.4.7"
+  },
+  "author": "Leonardo Aretakis",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/leoaretakis/famous-datetimepicker/issues"
+  },
+  "homepage": "https://github.com/leoaretakis/famous-datetimepicker"
+}
