@@ -7,22 +7,24 @@ A date and time picker using famo.us framework done for a Jogabo code challenge.
 Prerequisites
 ------------
 
-    It is necessary to have [node](http://nodejs.org/) and [npm](https://www.npmjs.org/) installed in your machine.
+It is necessary to have [node](http://nodejs.org) and [npm](https://www.npmjs.org) installed in your machine.
+
 
 Installation & Running
 ------------
 
-    ```
-    npm install
-    npm start
-    ```
+```
+npm install
+npm start
+```
 
 Usage
 ------------
 
 * On your browser
 
-    Just go to [http://localhost:3000](http://localhost:3000/)
+    Just go to [http://localhost:3000](http://localhost:3000)
+
 
 
 * On your mobile or browser emulator
