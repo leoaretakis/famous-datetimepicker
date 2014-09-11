@@ -9,7 +9,7 @@ define(function(require, exports, module) {
     var ContainerSurface = require("famous/surfaces/ContainerSurface");
 
     var HeaderView = require('app/views/HeaderView');
-    var WeekView      = require('app/views/WeekView');
+    var DateSelectionView      = require('app/views/DateSelectionView');
     var TimeListView = require('app/views/TimeListView');
 
     function AppView(model) {
@@ -63,10 +63,9 @@ define(function(require, exports, module) {
     function _createDateSelectionView(){
         var currentWeek = this.model.get('currentWeek');
 
-        this.dateSelectionView = new WeekView({
+        this.dateSelectionView = new DateSelectionView({
           size: [undefined, 50],
-          collection: currentWeek
-        });
+        }, this.model);
 
         this.dateSelectionModifier = new Modifier({
             transform: Transform.translate(0, 50, 0)

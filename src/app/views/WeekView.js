@@ -14,7 +14,8 @@ define(function(require, exports, module) {
     GenericSync.register({mouse: MouseSync});
 
     var TimeView     = require('app/views/TimeView');
-    // var Task         = require('models/Task');
+
+    var dayTemplate = require('hbs!app/templates/day');
 
     function WeekView(params) {
         View.apply(this, arguments);
@@ -29,11 +30,21 @@ define(function(require, exports, module) {
     WeekView.prototype = Object.create(View.prototype);
     WeekView.prototype.constructor = WeekView;
 
+    WeekView.prototype.updateContent= function(){
+        for(var i = 0; i < 7; i++) {
+            var day = this.collection.at(i);
+            var view = this.surfaces[i];
+
+            view.setContent(day.get('date').format("dd[<br/>]DD"))
+        }
+    }
+
     function _createContent() {
         this.sequentialLayout = new SequentialLayout({
             direction: 0
         });
         var views = [];
+        this.surfaces = [];
 
         var surf, offset, mod, view;
 
@@ -62,14 +73,15 @@ define(function(require, exports, module) {
             });
             view._add(mod).add(surf);
 
-            // surf.pipe(this.options.scrollView);
+            surf.pipe(this._eventOutput);
+
             views.push(view);
+            this.surfaces.push(surf);
         }
 
         this.sequentialLayout.sequenceFrom(views);
         this.add(this.sequentialLayout);
     }
-
 
     module.exports = WeekView;
 
