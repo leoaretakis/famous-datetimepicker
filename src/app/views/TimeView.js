@@ -40,7 +40,7 @@ define(function(require, exports, module) {
 
 
     this.timeSurface.on('click', function() {
-      this._eventOutput.emit('editTask', this.model);
+      this._eventOutput.emit('timeSelected', this.model);
     }.bind(this));
 
     this._add(this.timeModifier).add(this.timeSurface);

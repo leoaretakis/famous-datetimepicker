@@ -35,7 +35,11 @@ define(function(require, exports, module) {
             var day = this.collection.at(i);
             var view = this.surfaces[i];
 
-            view.setContent(day.get('date').format("dd[<br/>]DD"))
+            view.setContent(dayTemplate({
+                id: day.id,
+                weekDay: day.get('date').format('dd'),
+                monthDay: day.get('date').format('DD')
+            }));
         }
     }
 
@@ -83,7 +87,6 @@ define(function(require, exports, module) {
                 var $selectedElement = $(evt.currentTarget).find(".day");
                 var dateid = $selectedElement.data("dateid");
                 var selectedDate = this.collection.get(dateid);
-                // selectedDate.set('selected', true);
 
                 this._eventOutput.emit('dateSelected', selectedDate);
             }.bind(this));

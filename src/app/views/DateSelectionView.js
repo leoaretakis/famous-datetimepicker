@@ -30,7 +30,7 @@ define(function(require, exports, module) {
 
     DateSelectionView.DEFAULT_OPTIONS = {
         transition: {
-            duration: 1000,
+            duration: 600,
             curve: 'easeInOut'
         }
     };
@@ -60,6 +60,7 @@ define(function(require, exports, module) {
 
             setTimeout(function(){
                 this.weekViewPos.set(0);
+                this._eventOutput.emit('weekChanged', newCurrentWeek);
             }.bind(this), 0);
         }.bind(this));
     };
@@ -86,6 +87,7 @@ define(function(require, exports, module) {
 
             setTimeout(function(){
                 this.weekViewPos.set(0);
+                this._eventOutput.emit('weekChanged', newCurrentWeek);
             }.bind(this), 0);
         }.bind(this));
     };
@@ -142,7 +144,6 @@ define(function(require, exports, module) {
         sync.on('end', function(data){
             if(!this._weekChanged){
                 this.weekViewPos.set(0, this.options.transition);
-                this._weekChanged = false
             } else {
                 if(this._changeDirection > 0){
                     this.slideRight();
@@ -150,10 +151,11 @@ define(function(require, exports, module) {
                     this.slideLeft();
                 }
             }
+            this._weekChanged = false
         }.bind(this));
 
         sync.on('update', function(data) {
-            if(data.velocity > 1 || Math.abs(data.position) > (this._viewWidth/2.0) ){
+            if(data.velocity > 1 || Math.abs(data.position) > (this._viewWidth/3.0) ){
                 this._changeDirection = data.delta;
                 this._weekChanged = true;
             } else {
@@ -170,7 +172,6 @@ define(function(require, exports, module) {
         this.nextWeekView.pipe(this._eventInput);
 
         this._eventInput.on('dateSelected', function(data) {
-            debugger
             this._eventOutput.emit('dateSelected', data);
         }.bind(this));
     }

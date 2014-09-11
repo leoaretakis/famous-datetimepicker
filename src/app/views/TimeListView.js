@@ -37,14 +37,9 @@ define(function(require, exports, module) {
         this.scrollview.sequenceFrom(this.viewSequence);
         this.setContent();
 
-        // this.scrollview._eventOutput.emit = function(){
-        //     debugger
-        //     Scrollview.prototype.emit.call(this, arguments)
-        // }
-
-        // this._eventInput.on('editTask', function(data) {
-        //     this._eventOutput.emit('editTask', data);
-        // }.bind(this));
+        this._eventInput.on('timeSelected', function(data) {
+            this._eventOutput.emit('timeSelected', data);
+        }.bind(this));
 
         this.add(this.scrollview);
     }

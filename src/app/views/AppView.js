@@ -72,7 +72,13 @@ define(function(require, exports, module) {
         });
 
         this.dateSelectionView.on('dateSelected', function(dateModel){
-            this.resultView.setContent(dateModel.get("date").format("dddd[,] MMMM Do[<br/>]hh:mm A"));
+            this.model.set('selectedDate', dateModel.get('date'))
+            this.resultView.setContent(dateModel.get('date').format("dddd[,] MMMM Do[<br/>]hh:mm A"));
+        }.bind(this));
+
+        this.dateSelectionView.on('weekChanged', function(currentWeek){
+            var monthYearDate = moment().month(currentWeek.month()).year(currentWeek.year());
+            this.monthYearView.setContent(monthYearDate.format("MMM YYYY"));
         }.bind(this));
 
         this.layout.content.add(this.dateSelectionModifier).add(this.dateSelectionView);
@@ -111,16 +117,18 @@ define(function(require, exports, module) {
         this.listContainerMod = new Modifier({
             transform: Transform.translate(0,160,0)
         });
+
+        this.timeListView.on('timeSelected', function(timeModel){
+            this.model.set('selectedTime', timeModel);
+            this.model.get('selectedDate').hour(timeModel.get('hour'));
+            this.model.get('selectedDate').minute(timeModel.get('minute'));
+
+            this.resultView.setContent(this.model.get("selectedDate").format("dddd[,] MMMM Do[<br/>]hh:mm A"));
+        }.bind(this));
+
         this.listMod = new Modifier();
         this.listContainerView.add(this.listMod).add(this.timeListView);
         this.layout.content.add(this.listContainerMod).add(this.listContainerView);
-    }
-
-    function _setListeners(){
-        this.dateSelectionView.on('dateSelected', function(dateModel){
-            debugger
-            this.resultView.setContent(dateModel.get("date").format("dddd[,] MMMM Do[<br/>]hh:mm A"));
-        }.bind(this));
     }
 
     module.exports = AppView;

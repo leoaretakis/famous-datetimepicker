@@ -7,6 +7,7 @@ define(function(require, exports, module){
 
     defaults: {
       selectedDate: null,
+      selectedTime: null,
       currentWeek: null,
       previousWeek: null,
       nextWeek: null
@@ -15,6 +16,13 @@ define(function(require, exports, module){
     initialize: function(params) {
       if(params["selectedDate"]){
         params.selectedDate.hour(12).minute(00);
+        params.selectedTime = {
+          ampmTime: params.selectedDate.format('LT'),
+          completeTime: params.selectedDate.format('HH:mm'),
+          hour: params.selectedDate.hour(),
+          minute: params.selectedDate.minute()
+        };
+
         this.set({
           currentWeek: this.createWeekFromDate(params.selectedDate, true),
           previousWeek: this.createWeekFromDate(moment(params.selectedDate).add(-1, 'week')),
