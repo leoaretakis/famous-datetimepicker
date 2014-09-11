@@ -11,6 +11,7 @@ define(function(require, exports, module) {
     var HeaderView = require('app/views/HeaderView');
     var DateSelectionView      = require('app/views/DateSelectionView');
     var TimeListView = require('app/views/TimeListView');
+    var resultTemplate = require('hbs!app/templates/result');
 
     function AppView(model) {
         View.apply(this, arguments);
@@ -73,7 +74,7 @@ define(function(require, exports, module) {
 
         this.dateSelectionView.on('dateSelected', function(dateModel){
             this.model.set('selectedDate', dateModel.get('date'))
-            this.resultView.setContent(dateModel.get('date').format("dddd[,] MMMM Do[<br/>]hh:mm A"));
+            this.resultView.updateResult(this.model.get("selectedDate"));
         }.bind(this));
 
         this.dateSelectionView.on('weekChanged', function(currentWeek){
@@ -89,7 +90,7 @@ define(function(require, exports, module) {
 
         this.resultView = new Surface({
           size: [undefined, 60],
-          content: date.format("dddd[,] MMMM Do[<br/>]hh:mm A"),
+          content: "",
           properties: {
             textAlign: 'center',
             fontFamily: 'helvetica',
@@ -98,6 +99,18 @@ define(function(require, exports, module) {
             fontWeight: 'bold'
           }
         });
+
+        this.resultView.updateResult = function(date){
+            this.setContent(resultTemplate({
+                id: date.valueOf(),
+                dayName: date.format("dddd"),
+                monthName: date.format("MMMM"),
+                dayOrdinal: date.format("Do"),
+                time: date.format("hh:mm A")
+            }));
+        };
+
+        this.resultView.updateResult(date);
 
         var resultViewModifier = new Modifier({
             transform: Transform.translate(0, 100, 0)
@@ -123,7 +136,7 @@ define(function(require, exports, module) {
             this.model.get('selectedDate').hour(timeModel.get('hour'));
             this.model.get('selectedDate').minute(timeModel.get('minute'));
 
-            this.resultView.setContent(this.model.get("selectedDate").format("dddd[,] MMMM Do[<br/>]hh:mm A"));
+            this.resultView.updateResult(this.model.get("selectedDate"));
         }.bind(this));
 
         this.listMod = new Modifier();

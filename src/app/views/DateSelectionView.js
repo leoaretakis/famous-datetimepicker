@@ -96,7 +96,8 @@ define(function(require, exports, module) {
         var currentWeek = this.model.get('currentWeek');
         this.currentWeekView = new WeekView({
           size: [undefined, undefined],
-          collection: currentWeek
+          collection: currentWeek,
+          selectedDate: this.model.get('selectedDate')
         });
         this.currentWeekViewMod = new Modifier({
             transform: function() {
@@ -109,7 +110,8 @@ define(function(require, exports, module) {
         var previousWeek = this.model.get('previousWeek');
         this.previousWeekView = new WeekView({
           size: [undefined, undefined],
-          collection: previousWeek
+          collection: previousWeek,
+          selectedDate: this.model.get('selectedDate')
         });
         this.previousWeekViewMod = new Modifier({
             transform: function() {
@@ -121,7 +123,8 @@ define(function(require, exports, module) {
         var nextWeek = this.model.get('nextWeek');
         this.nextWeekView = new WeekView({
           size: [undefined, undefined],
-          collection: nextWeek
+          collection: nextWeek,
+          selectedDate: this.model.get('selectedDate')
         });
         this.nextWeekViewMod = new Modifier({
             transform: function() {

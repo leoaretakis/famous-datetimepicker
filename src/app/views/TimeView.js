@@ -7,6 +7,8 @@ define(function(require, exports, module) {
   var Utility          = require('famous/utilities/Utility');
   var Transitionable   = require('famous/transitions/Transitionable');
 
+  var template = require('hbs!app/templates/time')
+
   function TimeView(model) {
     View.apply(this);
 
@@ -24,22 +26,17 @@ define(function(require, exports, module) {
     this.timeModifier.sizeFrom(this.getSize());
 
     this.timeSurface = new Surface({
-      size: [undefined, 50],
-      properties: {
-        backgroundColor: 'white',
-        color: 'gray',
-        border: 'solid 1px',
-        fontFamily: 'helvetica',
-        lineHeight: '50px',
-        paddingLeft: '10px'
-      }
+      size: [undefined, 50]
     });
     this.setContent();
     this.timeSurface.pipe(this._eventOutput);
 
+    this.timeSurface.on('click', function(evt) {
+      var $selectedElement = $(evt.currentTarget).find(".time");
 
+      $("body").find(".selected-time").removeClass("selected-time");
+      $selectedElement.addClass("selected-time");
 
-    this.timeSurface.on('click', function() {
       this._eventOutput.emit('timeSelected', this.model);
     }.bind(this));
 
@@ -54,11 +51,7 @@ define(function(require, exports, module) {
   };
 
   TimeView.prototype.setContent = function() {
-    this.timeSurface.setContent(template(this.model));
-  };
-
-  var template = function(model) {
-    return "<div>" + model.get("ampmTime") + "</div>";
+    this.timeSurface.setContent(template(_.extend(this.model.toJSON(), {selected: this.model.get("completeTime") == "12:00"})));
   };
 
   module.exports = TimeView;

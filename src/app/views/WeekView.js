@@ -24,6 +24,10 @@ define(function(require, exports, module) {
             this.collection = params.collection;
         }
 
+        if(params.selectedDate){
+            this.selectedDate = params.selectedDate;
+        }
+
         _createContent.call(this);
     }
 
@@ -38,7 +42,8 @@ define(function(require, exports, module) {
             view.setContent(dayTemplate({
                 id: day.id,
                 weekDay: day.get('date').format('dd'),
-                monthDay: day.get('date').format('DD')
+                monthDay: day.get('date').format('DD'),
+                selected: this.selectedDate.isSame(day.get('date'), 'day')
             }));
         }
     }
@@ -62,13 +67,9 @@ define(function(require, exports, module) {
                 content: dayTemplate({
                     id: day.id,
                     weekDay: day.get('date').format('dd'),
-                    monthDay: day.get('date').format('DD')
-                }),
-                properties: {
-                    color: 'white',
-                    fontFamily: 'Helvetica',
-                    textAlign: 'center'
-                }
+                    monthDay: day.get('date').format('DD'),
+                    selected: this.selectedDate.isSame(day.get('date'), 'day')
+                })
             });
             surf.model = day;
 
@@ -87,6 +88,11 @@ define(function(require, exports, module) {
                 var $selectedElement = $(evt.currentTarget).find(".day");
                 var dateid = $selectedElement.data("dateid");
                 var selectedDate = this.collection.get(dateid);
+
+                $("body").find(".selected-date").removeClass("selected-date");
+                $selectedElement.addClass("selected-date");
+
+                this.selectedDate = selectedDate.get('date');
 
                 this._eventOutput.emit('dateSelected', selectedDate);
             }.bind(this));
