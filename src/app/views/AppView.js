@@ -12,8 +12,10 @@ define(function(require, exports, module) {
     var WeekView      = require('app/views/WeekView');
     var TimeListView = require('app/views/TimeListView');
 
-    function AppView() {
+    function AppView(model) {
         View.apply(this, arguments);
+
+        this.model = model;
 
         _createLayout.call(this);
         _createHeader.call(this);
@@ -43,21 +45,27 @@ define(function(require, exports, module) {
     }
 
     function _createMonthYearView(){
+        var date = this.model.get('selectedDate');
+
         this.monthYearView = new Surface({
           size: [undefined, 50],
-          content: 'Mar 2014',
+          content: date.format("MMM YYYY"),
           properties: {
             marginLeft: '12px',
             fontFamily: 'helvetica',
-            marginTop: '20px'
+            marginTop: '20px',
+            fontWeight: 'bold'
           }
         });
         this.layout.content.add(this.monthYearView);
     }
 
     function _createDateSelectionView(){
+        var currentWeek = this.model.get('currentWeek');
+
         this.dateSelectionView = new WeekView({
-          size: [undefined, 50]
+          size: [undefined, 50],
+          collection: currentWeek
         });
 
         this.dateSelectionModifier = new Modifier({
@@ -68,13 +76,17 @@ define(function(require, exports, module) {
     }
 
     function _createResultView(){
+        var date = this.model.get("selectedDate");
+
         this.resultView = new Surface({
           size: [undefined, 60],
-          content: 'Friday, March 28th<br/>12:00 PM', //TODO templates
+          content: date.format("dddd[,] MMMM Do[<br/>]hh:mm A"),
           properties: {
             textAlign: 'center',
             fontFamily: 'helvetica',
-            marginTop: '10px'
+            marginTop: '10px',
+            color: '#E2FF00',
+            fontWeight: 'bold'
           }
         });
 

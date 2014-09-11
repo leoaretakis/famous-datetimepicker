@@ -16,14 +16,14 @@ define(function(require, exports, module) {
     var TimeView     = require('app/views/TimeView');
     // var Task         = require('models/Task');
 
-    function WeekView(collection) {
+    function WeekView(params) {
         View.apply(this, arguments);
 
-        // this.dayViews = [];
-        // this.viewSequence = new ViewSequence(this.dayViews);
-        _createContent.call(this);
+        if(params.collection) {
+            this.collection = params.collection;
+        }
 
-        // this.add(this.viewSequence);
+        _createContent.call(this);
     }
 
     WeekView.prototype = Object.create(View.prototype);
@@ -40,9 +40,11 @@ define(function(require, exports, module) {
         var daySize = window.innerWidth / 7;
 
         for(var i = 0; i < 7; i++) {
+            var day = this.collection.at(i);
+
             surf = new Surface({
                 size: [daySize, 80],
-                content: 'Su<br/>01',
+                content: day.get('date').format("dd[<br/>]DD"),
                 properties: {
                     color: 'white',
                     fontFamily: 'Helvetica',

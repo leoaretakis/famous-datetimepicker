@@ -7,11 +7,11 @@ define(function(require, exports, module) {
     var RenderNode   = require('famous/core/RenderNode');
     var GenericSync  = require('famous/inputs/GenericSync');
     var MouseSync    = require('famous/inputs/MouseSync');
+    var Surface             = require('famous/core/Surface');
 
     GenericSync.register({mouse: MouseSync});
 
     var TimeView     = require('app/views/TimeView');
-    // var Task         = require('models/Task');
 
     function TimeListView() {
         View.apply(this, arguments);
@@ -61,6 +61,10 @@ define(function(require, exports, module) {
 
             this.timeViews.push(view);
         }
+
+        this.timeViews.push(new Surface({
+            size: [undefined, 160]
+        }));
     };
 
     module.exports = TimeListView;
