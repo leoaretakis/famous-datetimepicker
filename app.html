@@ -14,8 +14,9 @@
 
         <script type="text/javascript" src="src/lib/underscore.js"></script>
         <script type="text/javascript" src="src/lib/backbone.js"></script>
-        <script type="text/javascript" src="src/lib/handlebars.js"></script>
         <script type="text/javascript" src="src/lib/moment.js"></script>
+        <script type="text/javascript" src="src/lib/handlebars.js"></script>
+        <script type="text/javascript" src="src/lib/handlebars.runtime.js"></script>
 
         <!-- module loader -->
         <script type="text/javascript" src="http://code.famo.us/lib/require.js"></script>
@@ -28,7 +29,28 @@
         <link rel="stylesheet" type="text/css" href="css/app.css" />
         <script type="text/javascript">
             require.config({
-                baseUrl: './src/'
+                baseUrl: './src/',
+                paths: {
+                    'handlebars': 'lib/handlebars',
+                    'hbs': 'lib/hbs',
+                    'text': "lib/text"
+                },
+                shim: {
+                    "handlebars": {
+                        exports: 'Handlebars'
+                    }
+                },
+                packages: [
+                    {
+                        name: "hbs",
+                        location: "lib",
+                        main: "hbs"
+                    }
+                ],
+                hbs: {
+                    templateExtension: ".hbs",
+                    compilerPath: "lib/handlebars"
+                }
             });
             require(['main']);
         </script>
