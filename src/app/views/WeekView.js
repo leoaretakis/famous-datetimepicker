@@ -1,17 +1,15 @@
 define(function(require, exports, module) {
     var View            = require('famous/core/View');
     var Modifier     = require('famous/core/Modifier');
-    var ViewSequence = require('famous/core/ViewSequence');
-    var Scrollview   = require('famous/views/Scrollview');
-    var EventHandler = require('famous/core/EventHandler');
-    var RenderNode   = require('famous/core/RenderNode');
     var GenericSync  = require('famous/inputs/GenericSync');
     var MouseSync    = require('famous/inputs/MouseSync');
+    var TouchSync       = require('famous/inputs/TouchSync');
     var SequentialLayout     = require("famous/views/SequentialLayout");
     var Surface         = require('famous/core/Surface');
     var Transform           = require('famous/core/Transform');
+    require('famous/inputs/FastClick');
 
-    GenericSync.register({mouse: MouseSync});
+    GenericSync.register({mouse: MouseSync, touch: TouchSync});
 
     var TimeView     = require('app/views/TimeView');
 

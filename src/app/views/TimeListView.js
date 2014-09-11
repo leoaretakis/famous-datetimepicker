@@ -1,13 +1,11 @@
 define(function(require, exports, module) {
     var View            = require('famous/core/View');
-    var Modifier     = require('famous/core/Modifier');
     var ViewSequence = require('famous/core/ViewSequence');
     var Scrollview   = require('famous/views/Scrollview');
-    var EventHandler = require('famous/core/EventHandler');
-    var RenderNode   = require('famous/core/RenderNode');
     var GenericSync  = require('famous/inputs/GenericSync');
     var MouseSync    = require('famous/inputs/MouseSync');
     var Surface             = require('famous/core/Surface');
+    require('famous/inputs/FastClick');
 
     GenericSync.register({mouse: MouseSync});
 

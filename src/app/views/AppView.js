@@ -1,6 +1,5 @@
 define(function(require, exports, module) {
     var View                = require('famous/core/View');
-    var StateModifier       = require('famous/modifiers/StateModifier');
     var HeaderFooterLayout  = require('famous/views/HeaderFooterLayout');
     var Transform           = require('famous/core/Transform');
     var Surface             = require('famous/core/Surface');

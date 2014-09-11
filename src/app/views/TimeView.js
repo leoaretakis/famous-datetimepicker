@@ -3,9 +3,8 @@ define(function(require, exports, module) {
   var Modifier         = require('famous/core/Modifier');
   var Transform        = require('famous/core/Transform');
   var View             = require('famous/core/View');
-  var SequentialLayout = require('famous/views/SequentialLayout');
-  var Utility          = require('famous/utilities/Utility');
   var Transitionable   = require('famous/transitions/Transitionable');
+  require('famous/inputs/FastClick');
 
   var template = require('hbs!app/templates/time')
 

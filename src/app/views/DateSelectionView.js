@@ -1,11 +1,7 @@
 define(function(require, exports, module) {
     var View                = require('famous/core/View');
-    var StateModifier       = require('famous/modifiers/StateModifier');
-    var HeaderFooterLayout  = require('famous/views/HeaderFooterLayout');
     var Transform           = require('famous/core/Transform');
-    var Surface             = require('famous/core/Surface');
     var Modifier            = require('famous/core/Modifier');
-    var Utility            = require('famous/utilities/Utility');
     var Transitionable  = require('famous/transitions/Transitionable');
 
     var GenericSync     = require('famous/inputs/GenericSync');

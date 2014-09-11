@@ -1,11 +1,9 @@
 define(function(require, exports, module) {
     var Surface         = require('famous/core/Surface');
     var View            = require('famous/core/View');
-    var Modifier  = require('famous/core/Modifier');
     var StateModifier = require('famous/modifiers/StateModifier');
     var Transform       = require('famous/core/Transform');
     var ImageSurface    = require('famous/surfaces/ImageSurface');
-    var Utility   = require('famous/utilities/Utility');
 
     function HeaderView() {
         View.apply(this, arguments);
