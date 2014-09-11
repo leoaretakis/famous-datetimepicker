@@ -46,11 +46,13 @@ define(function(require, exports, module){
 
     initialize: function(params) {
       if(params["selectedDate"]){
+        params.selectedDate.hour(12).minute(00);
         this.set({
           currentWeek: createWeekFromDate(params.selectedDate),
           previousWeek: createWeekFromDate(moment(params.selectedDate).add(-1, 'week')),
           nextWeek: createWeekFromDate(moment(params.selectedDate).add(1, 'week'))
-        })
+        });
+
       }
     }
 
