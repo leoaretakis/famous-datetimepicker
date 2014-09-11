@@ -4,11 +4,9 @@ define(function(require, exports, module) {
 
     var AppModel         = require('app/models/App');
     var AppView         = require('app/views/AppView');
-    var times = require('app/config/defaultTimes');
 
-
-    var model = new AppModel({times: times});
-    var appView = new AppView(model);
+    var appModel = new AppModel({ selectedDate: moment() });
+    var appView = new AppView(appModel);
 
     var mainContext = Engine.createContext();
     mainContext.setPerspective(1000);
