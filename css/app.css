@@ -1,4 +1,35 @@
 html {
     background-color: #000;
     color: #fff;
-} 
+}
+
+div.day.selected-date .monthDay {
+  color: #E2FF00;
+  border: solid 2px #E2FF00;
+  border-radius: 400px;
+  font-weight: bold;
+}
+
+div.day {
+  color: white;
+  font-family: 'Helvetica';
+  text-align: center;
+}
+
+div.day .monthDay {
+  margin-top: 4px;
+}
+
+div.time {
+  background-color: white;
+  color: gray;
+  border: solid 1px gray;
+  font-family: 'helvetica';
+  line-height: 50px;
+  padding-left: 10px;
+}
+
+div.time.selected-time {
+  color: black;
+  font-weight: bold;
+}
