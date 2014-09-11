@@ -30,3 +30,4 @@ Usage
 * On your mobile or browser emulator
 
     On your mobile you'll have to access a diferrent url: [http://localhost:3000/app.html](http://localhost:3000/app.html)
+    (On your mobile you may have to use your ip address insted of 'localhost')
