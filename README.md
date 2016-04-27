@@ -3,6 +3,10 @@ famous-datetimepicker
 
 A date and time picker using famo.us framework done for a Jogabo code challenge.
 
+Preview
+------------
+[http://leoaretakis.github.io/famous-datetimepicker](http://leoaretakis.github.io/famous-datetimepicker)
+
 
 Prerequisites
 ------------
